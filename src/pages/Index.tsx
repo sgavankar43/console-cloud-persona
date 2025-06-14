@@ -86,7 +86,7 @@ const Index = () => {
         </>
       )}
 
-      {/* About section */}
+      {/* About section - using the same component as the standalone page */}
       <div ref={aboutRef}>
         <About />
       </div>
