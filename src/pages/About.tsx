@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Download, MapPin, Mail, Phone, Github, Linkedin } from 'lucide-react';
+import { Download } from 'lucide-react';
 import Navigation from '../components/Navigation';
 import BulbHolder from '../components/BulbHolder';
 

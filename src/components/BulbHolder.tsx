@@ -6,7 +6,7 @@ const BulbHolder = () => {
   const [isDark, setIsDark] = useState(false);
   const [isHeld, setIsHeld] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
-  const [dragPosition, setDragPosition] = useState({ x: 0, y: 0 });
+  const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
@@ -20,16 +20,23 @@ const BulbHolder = () => {
   }, []);
 
   const handleMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault();
     setIsDragging(true);
+    
     const rect = e.currentTarget.getBoundingClientRect();
-    setDragPosition({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top
+    setPosition({
+      x: e.clientX - rect.left - rect.width / 2,
+      y: e.clientY - rect.top - rect.height / 2
     });
   };
 
   const handleMouseMove = (e: MouseEvent) => {
     if (!isDragging) return;
+    
+    setPosition({
+      x: e.clientX - position.x,
+      y: e.clientY - position.y
+    });
     
     const holderElement = document.querySelector('.bulb-holder');
     if (!holderElement) return;
@@ -41,7 +48,7 @@ const BulbHolder = () => {
     );
     
     // If close enough to holder, snap to it
-    if (distance < 50) {
+    if (distance < 60) {
       if (!isHeld && !isAnimating) {
         setIsAnimating(true);
         setIsHeld(true);
@@ -59,8 +66,18 @@ const BulbHolder = () => {
     if (isDragging) {
       setIsDragging(false);
       
+      const holderElement = document.querySelector('.bulb-holder');
+      if (!holderElement) return;
+      
+      const holderRect = holderElement.getBoundingClientRect();
+      const currentPosition = isDragging ? position : { x: 0, y: 0 };
+      const distance = Math.sqrt(
+        Math.pow(currentPosition.x - (holderRect.left + holderRect.width / 2), 2) +
+        Math.pow(currentPosition.y - (holderRect.top + holderRect.height / 2), 2)
+      );
+      
       // If not close to holder, drop the bulb
-      if (isHeld && !isAnimating) {
+      if (distance >= 60 && isHeld && !isAnimating) {
         setIsAnimating(true);
         setIsHeld(false);
         setTimeout(() => {
@@ -83,7 +100,7 @@ const BulbHolder = () => {
         document.removeEventListener('mouseup', handleMouseUp);
       };
     }
-  }, [isDragging, isHeld, isAnimating]);
+  }, [isDragging, isHeld, isAnimating, position]);
 
   return (
     <div className="fixed top-4 right-4 z-50">
@@ -97,19 +114,19 @@ const BulbHolder = () => {
 
         {/* Lightbulb */}
         <div 
-          className={`absolute left-1/2 transform -translate-x-1/2 cursor-grab transition-all duration-300 ${
-            isHeld ? 'top-8' : 'top-16 translate-y-4'
-          } ${isAnimating ? 'animate-bounce' : ''} ${isDragging ? 'cursor-grabbing z-50' : ''}`}
+          className={`absolute cursor-grab transition-all duration-300 ${
+            isHeld ? 'left-1/2 top-8 transform -translate-x-1/2' : 'left-1/2 top-16 transform -translate-x-1/2 translate-y-4'
+          } ${isAnimating ? 'animate-bounce' : ''} ${isDragging ? 'cursor-grabbing z-50 pointer-events-none' : ''}`}
           onMouseDown={handleMouseDown}
           style={isDragging ? { 
             position: 'fixed',
-            left: `${dragPosition.x}px`,
-            top: `${dragPosition.y}px`,
+            left: `${position.x}px`,
+            top: `${position.y}px`,
             transform: 'translate(-50%, -50%)',
-            pointerEvents: 'none'
+            zIndex: 9999
           } : {}}
         >
-          <div className="relative">
+          <div className="relative pointer-events-auto">
             <Lightbulb 
               className={`w-8 h-8 transition-all duration-300 ${
                 isDark 
