@@ -1,218 +1,155 @@
-
 import React from 'react';
-import { Award, Calendar, ExternalLink } from 'lucide-react';
+import { Award, Calendar, ExternalLink, CheckCircle } from 'lucide-react';
 import Navigation from '../components/Navigation';
-import ThemeToggle from '../components/ThemeToggle';
+import BulbHolder from '../components/BulbHolder';
 
 const Certifications = () => {
   const certifications = [
     {
+      id: 1,
       title: "AWS Certified Solutions Architect - Associate",
       issuer: "Amazon Web Services",
       date: "2024",
-      credentialId: "SAA-C03-12345",
-      status: "Active",
-      description: "Validates expertise in architecting and deploying secure and robust applications on AWS technologies.",
-      color: "from-orange-500 to-red-500",
-      link: "#"
+      status: "Completed",
+      credentialId: "AWS-ASA-123456",
+      description: "Demonstrates knowledge of designing distributed systems on AWS platform with focus on scalability, reliability, and cost optimization.",
+      skills: ["AWS", "Cloud Architecture", "EC2", "S3", "RDS", "Lambda"],
+      image: "/placeholder.svg",
+      verificationUrl: "#"
     },
     {
+      id: 2,
       title: "Google Cloud Professional Cloud Architect",
       issuer: "Google Cloud",
       date: "2023",
-      credentialId: "GCP-PCA-67890",
-      status: "Active",
-      description: "Demonstrates ability to design, develop, and manage robust, secure, scalable, and dynamic solutions on Google Cloud.",
-      color: "from-blue-500 to-green-500",
-      link: "#"
+      status: "Completed",
+      credentialId: "GCP-PCA-789012",
+      description: "Validates ability to design, develop, and manage robust, secure, scalable, and dynamic solutions on Google Cloud Platform.",
+      skills: ["GCP", "Kubernetes", "BigQuery", "Cloud Storage", "Compute Engine"],
+      image: "/placeholder.svg",
+      verificationUrl: "#"
     },
     {
+      id: 3,
+      title: "Certified Kubernetes Administrator (CKA)",
+      issuer: "Cloud Native Computing Foundation",
+      date: "2023",
+      status: "Completed",
+      credentialId: "CKA-345678",
+      description: "Demonstrates skills in managing Kubernetes clusters, including installation, configuration, and troubleshooting.",
+      skills: ["Kubernetes", "Docker", "Container Orchestration", "DevOps"],
+      image: "/placeholder.svg",
+      verificationUrl: "#"
+    },
+    {
+      id: 4,
       title: "Microsoft Azure Fundamentals",
       issuer: "Microsoft",
-      date: "2023",
-      credentialId: "AZ-900-54321",
-      status: "Active",
-      description: "Foundational knowledge of cloud services and how those services are provided with Microsoft Azure.",
-      color: "from-blue-600 to-cyan-500",
-      link: "#"
-    },
-    {
-      title: "Docker Certified Associate",
-      issuer: "Docker Inc.",
-      date: "2023",
-      credentialId: "DCA-98765",
-      status: "Active",
-      description: "Validates skills in containerization, Docker platform administration, and container orchestration.",
-      color: "from-cyan-500 to-blue-500",
-      link: "#"
-    },
-    {
-      title: "Kubernetes Administrator (CKA)",
-      issuer: "Cloud Native Computing Foundation",
-      date: "2024",
-      credentialId: "CKA-13579",
+      date: "In Progress",
       status: "In Progress",
-      description: "Demonstrates skills required to be a successful Kubernetes Administrator in industry today.",
-      color: "from-purple-500 to-indigo-500",
-      link: "#"
-    }
-  ];
-
-  const upcomingCerts = [
-    {
-      title: "AWS Certified DevOps Engineer - Professional",
-      target: "Q2 2024",
-      description: "Advanced certification for DevOps engineering on AWS"
-    },
-    {
-      title: "Certified Jenkins Engineer",
-      target: "Q3 2024",
-      description: "CI/CD pipeline expertise with Jenkins"
+      credentialId: "",
+      description: "Foundational knowledge of cloud services and how those services are provided with Microsoft Azure.",
+      skills: ["Azure", "Cloud Computing", "Virtual Machines", "Storage"],
+      image: "/placeholder.svg",
+      verificationUrl: "#"
     }
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-teal-50 dark:from-gray-900 dark:to-teal-900">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-100 dark:from-gray-900 dark:to-gray-800">
       <Navigation />
-      <ThemeToggle />
+      <BulbHolder />
       
       <div className="pt-24 pb-12 px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
               Certifications
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Professional certifications in cloud computing and technology
+            <div className="w-24 h-1 bg-gradient-to-r from-orange-500 to-red-500 mx-auto"></div>
+            <p className="mt-6 text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+              Professional certifications that validate my expertise in cloud computing and related technologies.
             </p>
-            <div className="w-24 h-1 bg-gradient-to-r from-green-500 to-teal-500 mx-auto mt-6"></div>
           </div>
 
-          {/* Current Certifications */}
-          <div className="mb-16">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">
-              Current Certifications
-            </h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {certifications.map((cert, index) => (
-                <div
-                  key={index}
-                  className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition-all duration-300"
-                >
-                  <div className={`h-24 bg-gradient-to-r ${cert.color} flex items-center justify-center`}>
-                    <Award className="w-10 h-10 text-white" />
-                  </div>
-                  
-                  <div className="p-6">
-                    <div className="mb-4">
-                      <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
-                        {cert.title}
-                      </h3>
-                      <p className="text-gray-600 dark:text-gray-400 text-sm">
-                        {cert.issuer}
-                      </p>
-                    </div>
-                    
-                    <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 leading-relaxed">
-                      {cert.description}
-                    </p>
-                    
-                    <div className="space-y-2 mb-4">
-                      <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
-                        <Calendar className="w-4 h-4" />
-                        <span>Earned: {cert.date}</span>
+          <div className="grid lg:grid-cols-2 gap-8">
+            {certifications.map((cert) => (
+              <div
+                key={cert.id}
+                className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+              >
+                <div className="p-8">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="flex items-center space-x-3">
+                      <div className="p-2 bg-orange-100 dark:bg-orange-900 rounded-lg">
+                        <Award className="w-6 h-6 text-orange-600 dark:text-orange-300" />
                       </div>
-                      <div className="text-sm text-gray-600 dark:text-gray-400">
-                        <span className="font-medium">ID:</span> {cert.credentialId}
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <span 
-                          className={`px-2 py-1 rounded-full text-xs font-medium ${
-                            cert.status === 'Active' 
-                              ? 'bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100'
-                              : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-800 dark:text-yellow-100'
-                          }`}
-                        >
-                          {cert.status}
-                        </span>
+                      <div>
+                        <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                          {cert.title}
+                        </h3>
+                        <p className="text-gray-600 dark:text-gray-400 font-medium">
+                          {cert.issuer}
+                        </p>
                       </div>
                     </div>
                     
-                    <a
-                      href={cert.link}
-                      className="flex items-center space-x-2 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                      <span className="text-sm font-medium">Verify Credential</span>
-                    </a>
+                    <div className="text-right">
+                      <div className={`inline-flex items-center space-x-1 px-3 py-1 rounded-full text-sm font-medium ${
+                        cert.status === 'Completed' 
+                          ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-300'
+                          : 'bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-300'
+                      }`}>
+                        {cert.status === 'Completed' ? (
+                          <CheckCircle className="w-4 h-4" />
+                        ) : (
+                          <Calendar className="w-4 h-4" />
+                        )}
+                        <span>{cert.status}</span>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </div>
 
-          {/* Upcoming Certifications */}
-          <div>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">
-              Upcoming Goals
-            </h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              {upcomingCerts.map((cert, index) => (
-                <div
-                  key={index}
-                  className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 border-2 border-dashed border-gray-300 dark:border-gray-600"
-                >
-                  <div className="flex items-center space-x-3 mb-4">
-                    <div className="p-2 bg-gray-100 dark:bg-gray-700 rounded-lg">
-                      <Award className="w-6 h-6 text-gray-600 dark:text-gray-400" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-gray-900 dark:text-white">
-                        {cert.title}
-                      </h3>
-                      <p className="text-gray-600 dark:text-gray-400 text-sm">
-                        Target: {cert.target}
-                      </p>
-                    </div>
-                  </div>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm">
+                  <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
                     {cert.description}
                   </p>
-                </div>
-              ))}
-            </div>
-          </div>
 
-          {/* Stats */}
-          <div className="mt-16 text-center">
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div>
-                  <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">
-                    {certifications.filter(c => c.status === 'Active').length}
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {cert.skills.map((skill) => (
+                      <span
+                        key={skill}
+                        className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md text-xs"
+                      >
+                        {skill}
+                      </span>
+                    ))}
                   </div>
-                  <div className="text-gray-600 dark:text-gray-400">Active Certs</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">
-                    3
+
+                  <div className="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-gray-700">
+                    <div className="flex items-center space-x-2 text-gray-500 dark:text-gray-400">
+                      <Calendar className="w-4 h-4" />
+                      <span className="text-sm">{cert.date}</span>
+                    </div>
+                    
+                    {cert.verificationUrl && cert.status === 'Completed' && (
+                      <a
+                        href={cert.verificationUrl}
+                        className="flex items-center space-x-1 text-orange-600 dark:text-orange-400 hover:text-orange-800 dark:hover:text-orange-300 transition-colors"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                        <span className="text-sm">Verify</span>
+                      </a>
+                    )}
                   </div>
-                  <div className="text-gray-600 dark:text-gray-400">Cloud Platforms</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">
-                    2024
-                  </div>
-                  <div className="text-gray-600 dark:text-gray-400">Latest Year</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-orange-600 dark:text-orange-400 mb-2">
-                    2
-                  </div>
-                  <div className="text-gray-600 dark:text-gray-400">In Progress</div>
+
+                  {cert.credentialId && (
+                    <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                      Credential ID: {cert.credentialId}
+                    </div>
+                  )}
                 </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>

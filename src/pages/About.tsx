@@ -2,13 +2,11 @@
 import React from 'react';
 import { Download, MapPin, Mail, Phone, Github, Linkedin } from 'lucide-react';
 import Navigation from '../components/Navigation';
-import ThemeToggle from '../components/ThemeToggle';
+import BulbHolder from '../components/BulbHolder';
 
 const About = ({ isStandalone = false }: { isStandalone?: boolean }) => {
   const handleResumeDownload = () => {
-    // This would typically trigger a download of your resume
     console.log('Resume download triggered');
-    // You can implement actual download logic here
   };
 
   const content = (
@@ -27,13 +25,11 @@ const About = ({ isStandalone = false }: { isStandalone?: boolean }) => {
             <div className="relative mb-8">
               <div className="w-80 h-80 rounded-2xl bg-gradient-to-br from-blue-600 via-purple-600 to-cyan-600 p-1 shadow-2xl">
                 <div className="w-full h-full rounded-2xl bg-gray-200 dark:bg-gray-700 flex items-center justify-center overflow-hidden">
-                  {/* Placeholder for your actual image */}
                   <div className="w-full h-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center">
                     <div className="text-white text-6xl font-bold">CS</div>
                   </div>
                 </div>
               </div>
-              {/* Decorative elements */}
               <div className="absolute -top-4 -right-4 w-8 h-8 bg-yellow-400 rounded-full animate-bounce"></div>
               <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-pink-400 rounded-full animate-pulse"></div>
             </div>
@@ -69,36 +65,6 @@ const About = ({ isStandalone = false }: { isStandalone?: boolean }) => {
                 that challenge my skills and creativity.
               </p>
             </div>
-
-            {/* Contact Information */}
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl">
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
-                Get In Touch
-              </h3>
-              <div className="space-y-4">
-                <div className="flex items-center space-x-3 text-gray-600 dark:text-gray-300">
-                  <MapPin className="w-5 h-5 text-blue-500" />
-                  <span>Your Location</span>
-                </div>
-                <div className="flex items-center space-x-3 text-gray-600 dark:text-gray-300">
-                  <Mail className="w-5 h-5 text-blue-500" />
-                  <span>your.email@example.com</span>
-                </div>
-                <div className="flex items-center space-x-3 text-gray-600 dark:text-gray-300">
-                  <Phone className="w-5 h-5 text-blue-500" />
-                  <span>+1 (555) 123-4567</span>
-                </div>
-              </div>
-              
-              <div className="flex space-x-4 mt-6">
-                <a href="#" className="p-3 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
-                  <Github className="w-5 h-5 text-gray-700 dark:text-gray-300" />
-                </a>
-                <a href="#" className="p-3 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
-                  <Linkedin className="w-5 h-5 text-gray-700 dark:text-gray-300" />
-                </a>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -108,7 +74,7 @@ const About = ({ isStandalone = false }: { isStandalone?: boolean }) => {
   return isStandalone ? (
     <div>
       <Navigation />
-      <ThemeToggle />
+      <BulbHolder />
       <div className="pt-16">
         {content}
       </div>

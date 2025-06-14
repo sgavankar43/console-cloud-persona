@@ -1,127 +1,129 @@
-
 import React from 'react';
-import { ExternalLink, Github, Cloud, Server, Database } from 'lucide-react';
+import { ExternalLink, Github } from 'lucide-react';
 import Navigation from '../components/Navigation';
-import ThemeToggle from '../components/ThemeToggle';
+import BulbHolder from '../components/BulbHolder';
 
 const Projects = () => {
   const projects = [
     {
-      title: "Cloud Infrastructure Automation",
-      description: "Automated cloud infrastructure deployment using Terraform and AWS services. Features auto-scaling, load balancing, and monitoring.",
-      technologies: ["AWS", "Terraform", "Docker", "Kubernetes"],
-      icon: Cloud,
-      github: "#",
-      demo: "#",
-      color: "from-blue-500 to-cyan-500"
+      id: 1,
+      title: "Cloud Infrastructure Manager",
+      description: "A comprehensive dashboard for managing cloud resources across multiple providers with cost optimization features.",
+      technologies: ["React", "Node.js", "AWS", "Docker", "MongoDB"],
+      image: "/placeholder.svg",
+      liveUrl: "#",
+      githubUrl: "#",
+      featured: true
     },
     {
-      title: "Microservices Architecture",
-      description: "Scalable microservices application with API Gateway, service discovery, and distributed tracing.",
-      technologies: ["Node.js", "Docker", "MongoDB", "Redis"],
-      icon: Server,
-      github: "#",
-      demo: "#",
-      color: "from-purple-500 to-pink-500"
+      id: 2,
+      title: "DevOps Pipeline Automation",
+      description: "Automated CI/CD pipeline with monitoring, testing, and deployment to multiple environments.",
+      technologies: ["Jenkins", "Kubernetes", "Terraform", "Python", "GitLab"],
+      image: "/placeholder.svg",
+      liveUrl: "#",
+      githubUrl: "#",
+      featured: true
     },
     {
-      title: "Cloud Database Migration Tool",
-      description: "Tool for migrating databases to cloud platforms with zero downtime and data validation.",
-      technologies: ["Python", "PostgreSQL", "AWS RDS", "Lambda"],
-      icon: Database,
-      github: "#",
-      demo: "#",
-      color: "from-green-500 to-teal-500"
+      id: 3,
+      title: "Microservices API Gateway",
+      description: "Scalable API gateway with load balancing, rate limiting, and service discovery.",
+      technologies: ["Go", "Redis", "PostgreSQL", "Consul", "Nginx"],
+      image: "/placeholder.svg",
+      liveUrl: "#",
+      githubUrl: "#",
+      featured: false
+    },
+    {
+      id: 4,
+      title: "Real-time Analytics Dashboard",
+      description: "Live data visualization dashboard for monitoring application metrics and user behavior.",
+      technologies: ["Vue.js", "D3.js", "Apache Kafka", "InfluxDB", "Grafana"],
+      image: "/placeholder.svg",
+      liveUrl: "#",
+      githubUrl: "#",
+      featured: false
     }
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-100 dark:from-gray-900 dark:to-gray-800">
       <Navigation />
-      <ThemeToggle />
+      <BulbHolder />
       
       <div className="pt-24 pb-12 px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
               My Projects
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Explore my cloud computing and software development projects
+            <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto"></div>
+            <p className="mt-6 text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+              Here are some of the projects I've worked on, showcasing my skills in cloud computing, 
+              web development, and software engineering.
             </p>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mt-6"></div>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => {
-              const IconComponent = project.icon;
-              return (
-                <div
-                  key={index}
-                  className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition-all duration-300 hover:shadow-2xl"
-                >
-                  <div className={`h-32 bg-gradient-to-r ${project.color} flex items-center justify-center`}>
-                    <IconComponent className="w-12 h-12 text-white" />
+            {projects.map((project) => (
+              <div
+                key={project.id}
+                className={`bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:scale-105 ${
+                  project.featured ? 'ring-2 ring-purple-500 dark:ring-purple-400' : ''
+                }`}
+              >
+                <div className="relative">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-48 object-cover"
+                  />
+                  {project.featured && (
+                    <div className="absolute top-4 right-4 bg-purple-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
+                      Featured
+                    </div>
+                  )}
+                </div>
+                
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                    {project.title}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm leading-relaxed">
+                    {project.description}
+                  </p>
+                  
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md text-xs"
+                      >
+                        {tech}
+                      </span>
+                    ))}
                   </div>
                   
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
-                      {project.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
-                      {project.description}
-                    </p>
-                    
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {project.technologies.map((tech, techIndex) => (
-                        <span
-                          key={techIndex}
-                          className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm font-medium"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                    
-                    <div className="flex space-x-4">
-                      <a
-                        href={project.github}
-                        className="flex items-center space-x-2 px-4 py-2 bg-gray-900 dark:bg-gray-700 text-white rounded-lg hover:bg-gray-800 dark:hover:bg-gray-600 transition-colors"
-                      >
-                        <Github className="w-4 h-4" />
-                        <span>Code</span>
-                      </a>
-                      <a
-                        href={project.demo}
-                        className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                        <span>Demo</span>
-                      </a>
-                    </div>
+                  <div className="flex space-x-4">
+                    <a
+                      href={project.liveUrl}
+                      className="flex items-center space-x-1 text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-300 transition-colors"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      <span className="text-sm">Live Demo</span>
+                    </a>
+                    <a
+                      href={project.githubUrl}
+                      className="flex items-center space-x-1 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
+                    >
+                      <Github className="w-4 h-4" />
+                      <span className="text-sm">Code</span>
+                    </a>
                   </div>
                 </div>
-              );
-            })}
-          </div>
-
-          {/* Call to action */}
-          <div className="text-center mt-16">
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                Want to see more?
-              </h2>
-              <p className="text-gray-600 dark:text-gray-300 mb-6">
-                Check out my GitHub for more projects and contributions
-              </p>
-              <a
-                href="#"
-                className="inline-flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105"
-              >
-                <Github className="w-5 h-5" />
-                <span>Visit My GitHub</span>
-              </a>
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

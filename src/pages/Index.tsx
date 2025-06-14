@@ -1,13 +1,15 @@
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import AnimatedAvatar from '../components/AnimatedAvatar';
-import Navigation from '../components/Navigation';
-import ThemeToggle from '../components/ThemeToggle';
+import BulbHolder from '../components/BulbHolder';
 import CursorFollower from '../components/CursorFollower';
+import HomeNavigation from '../components/HomeNavigation';
+import SocialLinks from '../components/SocialLinks';
 import About from './About';
 
 const Index = () => {
   const aboutRef = useRef<HTMLDivElement>(null);
+  const [showHeaderFooter, setShowHeaderFooter] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,6 +18,9 @@ const Index = () => {
       if (parallax) {
         parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
       }
+
+      // Hide header/footer when scrolling down
+      setShowHeaderFooter(scrolled < 100);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -29,7 +34,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 dark:from-black dark:via-purple-950 dark:to-black relative overflow-hidden">
       <CursorFollower />
-      <ThemeToggle />
+      <BulbHolder />
       
       {/* Animated background */}
       <div className="parallax-bg absolute inset-0 opacity-20">
@@ -73,8 +78,13 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Navigation buttons */}
-      <Navigation isHomePage={true} />
+      {/* Navigation and Social Links - only show when at top */}
+      {showHeaderFooter && (
+        <>
+          <HomeNavigation />
+          <SocialLinks />
+        </>
+      )}
 
       {/* About section */}
       <div ref={aboutRef}>
